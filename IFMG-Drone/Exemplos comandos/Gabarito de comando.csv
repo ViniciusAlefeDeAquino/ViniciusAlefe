@@ -1,0 +1,32 @@
+T;CM;;
+linha vazia;linha vazia;linha vazia;linha vazia
+Mf altitude;Mf rolagem;Mf arfagem;Mf guinada
+Ct altitude;Ct rolagem;Ct arfagem;Ct guinada
+Kp altitude;Kp rolagem;Kp arfagem;Kp guinada
+Ki altitude;Ki rolagem;Ki arfagem;Ki guinada
+Kd altitude;Kd rolagem;Kd arfagem;Kd guinada
+linha vazia;linha vazia;linha vazia;linha vazia
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+Comando Altitude;Comando rolagem;Comando arfagem;Comando guinada
+;;;
+Obs:A planta suporta de 1 a 20000 linhas de comando. Dentro desses limites a quantidade de linhas de comando é arbritrária.;;;
+;;;
+Legenda:;;;
+T ->;Tempo de passo de comando (em milisegundos), valor mínimo de 10ms;;
+CM ->;Comando manual por potenciometros (0 desativado e 1 ativado);;
+MF ->;Sistema em malha fechada (0 em malha aberta e 1 em malha fechada);;
+Ct ->;Aplicação de controlador PID (0 sem controlador e 1 com controlador);;
+Kp, Ki, Kd ->;Constantes proporciona, integral e derivativa de cada controlador aplicado;;
+;;;
+Obs: Os exemplos de comando podem ser utilizados junto a este gabarito para melhor compreensão;;;
