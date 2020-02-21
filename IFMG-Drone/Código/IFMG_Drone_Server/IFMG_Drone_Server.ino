@@ -250,20 +250,6 @@ void setup(void) {
  /*-------------------------------------------------*/
   //conectando-se à rede wifi
   
-  reconectar:
-  i=0;
-  WiFi.begin("rraaquino Oi Fibra (2.4G)", "rraaquino1980");
-  while (WiFi.status() != WL_CONNECTED) {
-    if(i>20){
-      WiFi.disconnect();
-      goto reconectar;
-    }      
-    i++;
-    delay(250); Serial.print('.');
-  }
-  i=0;
-  
-  /*
   delay(28000);                                                     //agurdando o roteador inicializar
   reconectar:
   i=0;
@@ -277,7 +263,7 @@ void setup(void) {
     delay(250); Serial.print('.');
   }
   i=0;
-  */
+  
   
   Serial.println("\nEndereço IP: " + WiFi.localIP().toString());
   lcd.clear();
@@ -352,13 +338,20 @@ void HomePage(){
   webpage += F("<h3>Apresentação<p></h3>");
   webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esta é uma planta didática construída para estudos de modelagem e aplicação de controle em sistemas dinâmicos. Nela, é possível a atuação em malha aberta ou fechada em até 3 diferentes sistemas (arfagem, rolagem e guinada), cada um deles representado um ângulo de posicionamento do drone em funcionamento.<p></h6>");
   webpage += F("<h3>Como utilizar<p></h3>");
-  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para utilizar a planta e atuar em seus sistemas, é necessário, antes de tudo, verificar o correto posicionamento do drone em planta. Verifique se todos os conectores estão conectados e devidamente posicionados. Certifique-se tambem que o elástico de fixação está bem esticado.<p></h6>");
-  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com o drone devidamente posicionado e a planta corretamente ligada, é necessária a realização do procedimento de calibragem dos sensores do drone. As instuções para calibrar os sensores podem ser encontradas na página de calibragem. A calibragem sempre deve ser realizada uma vez após a planta ser ligada, podendo ser feita facultativamente outras vezes durante a utilização.<p></h6>");
-  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outro passo necessário é o envio do arquivo de comando para a planta. Esse arquivo será o responsável tanto pela definição dos parâmetros e controladores do teste, como dos valores de referência a serem seguidos pelos sistemas em cada passo de tempo. Dessa forma, é possível a aplicação de sinais com formas de onda variadas como diferentes amplitudes para cada um dos sistemas presente na planta. Mais instruções para o envio de comandos podem ser acessados na página 'enviar'.<p></h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Montagem física</b></p></h7>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para utilizar a planta e atuar em seus sistemas, é necessário, antes de tudo, verificar o correto posicionamento do drone em planta. Verifique se todos os conectores estão conectados e devidamente posicionados. Certifique-se tambem que o elástico de fixação está bem esticado.</h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Calibragem</b></p></h7>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Com o drone devidamente posicionado e a planta corretamente ligada, é necessária a realização do procedimento de calibragem dos sensores do drone. As instuções para calibrar os sensores podem ser encontradas na página de calibragem. A calibragem sempre deve ser realizada uma vez após a planta ser ligada, podendo ser feita facultativamente outras vezes durante a utilização.</h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Envio de comandos</b></p></h7>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Outro passo necessário é o envio do arquivo de comando para a planta. Esse arquivo será o responsável tanto pela definição dos parâmetros e controladores do teste, como dos valores de referência a serem seguidos pelos sistemas em cada passo de tempo. Dessa forma, é possível a aplicação de sinais com formas de onda variadas como diferentes amplitudes para cada um dos sistemas presente na planta. Mais instruções para o envio de comandos podem ser acessados na página 'enviar'. Exemplos e o gabarito do arquivo de comando podem ser encontrados a partir do link:<a href='https://github.com/ViniciusAlefeDeAquino/ViniciusAlefe/tree/master/IFMG-Drone'> https://github.com/ViniciusAlefeDeAquino/ViniciusAlefe/tree/master/IFMG-Drone.</a></h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Iniciar</b></p></h7>");
   webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Após a calibragem dos sensores e o envio do arquivo de comando, os ensaios dinâmicos podem ser realizados através da página 'Teste'. Na página 'Teste' é realizada a execução dos comandos enviados à planta. Mais instruções sobre a execução dos ensaios dinâmicos podem ser encontrados nessa mesma página.<p></h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Resultados</b></p></h7>");
   webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Após a conclusão dos testes, a planta gera um arquivo de resultados no formato 'csv' com todos os resultados dos sensores em função do tempo durante o teste. É possível baixar o arquivo de resultados na página 'Baixar'.</h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Outros recursos</b></p></h7>");
   webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em caso de má utilização dos recursos de download e upload de arquivos a planta pode apresentar problemas. É possível observar o diretório de arquivos da planta através da página 'Arquivos' e, caso ocorra algum problema, é possível formatar o diretório de arquivos na mesma página. Não recomenda-se o upload de arquivos que não sejam de comando, uma vez que arquivos alheios à utilização da planta serão perdidos durante ensaios dinâmicos.</h6>");
   webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ao solicitar o envio de arquivos, arquivos já armazenados com o mesmo nome serão substituídos, entretanto, é possivel ainda excluir arquivos através da página 'Apagar'.</h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b></b></p></h7>");
   append_page_footer();
   SendHTML_Content();
   SendHTML_Stop();
@@ -399,7 +392,15 @@ void File_Upload() {
 
   append_page_header();
   append_page_menu();
-  webpage += F("<h3>Selecione um arquivo para enviar</h3>");
+  webpage += F("<h3>Enviar arquivo de comando</h3>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para uma melhor compreensão do correto formato de arquivos para comandos da planta, recomenda-se vizualizar os arquivos exeplares e o gabarito de comandos disponíveis no link:<a href='https://github.com/ViniciusAlefeDeAquino/ViniciusAlefe/tree/master/IFMG-Drone'> https://github.com/ViniciusAlefeDeAquino/ViniciusAlefe/tree/master/IFMG-Drone.</a></h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Para iniciar a utilização e compreender melhor o funcionamento geral da planta recomenda-se a utilização dos arquivos exemplares como comando. Para pessoas que não têm o domínio da dinâmica dos sistemas disponíveis (rolagem, arfagem e guinada) recomenda-se a utilização primeiramente da rolagem (segunda coluna no arquivo de comando, como consta no gabarito) como sistema em malha aberta. Naturalmente, a rolagem, se aproxima de um sistema dinâmico linear de segunda ordem.</h6>");
+  webpage += F("<h7><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Potenciômetros</b></p></h7>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em caso de seleção de comando manual no arquivo enviado, os potenciômetros representam respectivamente (da esquerda para a direita):</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 - Potência média geral dos motores (altitude). O software ajusta automaticamente o valor mínimo necessário acordo com a entrada aplicada para valores de arfagem, rolagem ou guinada, não sendo necessária a utilização durante ensaios. Recomenda-se repousar em zero. Os valores do potenciômetro variam de 0 a 127. Ponto zero na marcação inicial.</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 - Rolagem. Varia de -80 a 80 em malha fechada e de -20 a 20 em malha aberta. Ponto zero na marcação mediana.</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 - Arfamge. Varia de -80 a 80 em malha fechada e de -20 a 20 em malha aberta. Ponto zero na marcação mediana.</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 - Guinada. Varia de -127 a 127 em qualquer configuração. Ponto zero na marcação mediana.</h6>");
   webpage += F("<FORM action='/fupload' method='post' enctype='multipart/form-data'>");
   webpage += F("<input class='buttons' style='width:40%' type='file' name='fupload' id = 'fupload' value=''><br>");
   webpage += F("<br><button class='buttons' style='width:10%' type='submit'>Enviar Arquivo</button><br>");
@@ -460,6 +461,8 @@ void SPIFFS_dir() {
       root.rewindDirectory();
       SendHTML_Header();
       append_page_menu();
+      webpage += F("<h3>Diretório de Arquivos</h3>");
+      webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aqui podem ser visualizados todos os arquivos disponíveis na memória interna do dispositivo. Em caso de problemas no diretório (a não vizualização de arquivos, por exemplo), o botão \"formatar\" pode ser acionado como solução.</h6>");
       webpage += F("<h3 class='rcorners_x'>Conteúdo Interno - Esp32</h3><br>");
       webpage += F("<table align='center'>");
       webpage += F("<tr><th>Nome</th><th style='width:20%'>Tipo</th><th>Tamanho</th></tr>");
@@ -682,6 +685,10 @@ void Format() {
 void Test() {
   append_page_header();
   append_page_menu();
+  webpage += F("<h3>Iniciar Teste</h3>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acione o botão \"Iniciar\" para que a planta execute os comandos enviados. Caso selecionado o comando manual via potenciômetros no arquivo de comando, recomenda-se posicionar os potenciômetros nos pontos nulos marcados fisicamente na planta. As descrições dos potenciômetros encontram-se na página \"Enviar\".</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Em caso de problemas severos de leitura dos dados, o teste será automaticamente encerrado para garantir a integridade dos dados do arquivo de resultados. Testes seguros duram por até pouco mais de 1 minuto, assim, testes maiores que isso podem ser encerrados devido ao exesso de espaço ocupado na memória ou instabilidades de leituras dos sensores, sendo imediatamente encerrados após a ocorrência de problemas (um teste abortado não descarta o arquivo de resultados gerado).</h6>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Após a conclusão do processo, será gerado o arquivo \"resultados.csv\" que pode ser baixado na página \"Baixar\".</h6>");
   append_page_iniciar();
   append_page_footer();
   server.send(200, "text/html", webpage);
@@ -695,6 +702,8 @@ void Test() {
 void Calibrar() {
   append_page_header();
   append_page_menu();
+  webpage += F("<h3>Calibragem de sensores</h3>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mantenha o drone completamente estático e acione o botão \"calibrar\". Mantenha o drone parado até que o procedimento de calibragem seja concluído.</h6>");
   append_page_calibrar();
   append_page_footer();
   server.send(200, "text/html", webpage);
@@ -710,6 +719,7 @@ void Calibrado() {
   append_page_header();
   append_page_menu();
   webpage += F("<h3>Sensores calibrados com sucesso</h3>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agora, o drone está pronto para ser operado.</h6>");
   append_page_footer();
   server.send(200, "text/html", webpage);
   digitalWrite(2,HIGH);
@@ -731,6 +741,7 @@ void Start() {
   append_page_header();
   append_page_menu();
   webpage += F("<h3>Teste iniciado com sucesso, aguarde.</h3>");
+  webpage += F("<h6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O sistema fará a leitura dos comandos e, em aproximadamente 15 segundos, os comandos serão iniciados. Esta webpage permanecerá não operacional até que a execução de todos comandos seja concluída.</h6>");
   append_page_footer();
   server.send(200, "text/html", webpage);
 
@@ -1674,12 +1685,12 @@ void Comando(void *parametro) {
       p1=(p1/511)*127;
       
       if(mfRol==1)
-        p2=((p2/511)*255) - 127;
+        p2=((p2/511)*160) - 80;
       else
         p2=((p2/511)*40) - 20;
         
       if(mfArf==1)
-        p3=((p3/511)*255) - 127;
+        p3=((p3/511)*160) - 80;
       else
         p3=((p3/511)*100) - 50;
         

@@ -21,7 +21,9 @@ void append_page_header() {
   webpage += F("h2{color:#004400;font-size:1.0em;}");
   webpage += F("h3{font-size:1.0em;color:#004400;}");
   webpage += F("h4{font-size:1.0em;color:#004400;align:center;float:auto}");
-  webpage += F("h6{font-size:0.8em;color:#004400;text-align: left;}");
+  webpage += F("h6{font-size:0.8em;color:#004400;text-align: justify;}");
+  webpage += F("h7{font-size:1.2em;color:#004400;align:left;text-align:left;}");
+  webpage += F("h8{font-size:0.9em;color:#004400;align:left;text-align:left;}");
   webpage += F("table{font-family:arial,sans-serif;font-size:0.9em;border-collapse:collapse;width:85%;}"); 
   webpage += F("th,td {border:0.06em solid #dddddd;text-align:left;padding:0.3em;border-bottom:0.06em solid #dddddd;color:#004400}");
   webpage += F(".texto {color:#004400;font-size:100%;text-align:Left}");
